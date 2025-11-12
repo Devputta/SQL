@@ -1,0 +1,380 @@
+QUERYS 
+
+Query the list of CITY names starting with vowels (i.e., a, e, i, o, or u) from STATION. Your result cannot contain duplicates. Input Format The STATION table is described as follows:
+
+SELECT DISTINCT CITY
+FROM STATION
+WHERE CITY LIKE 'A%' 
+   OR CITY LIKE 'E%' 
+   OR CITY LIKE 'I%' 
+   OR CITY LIKE 'O%' 
+   OR CITY LIKE 'U%';
+
+Query the list of CITY names ending with vowels (a, e, i, o, u) from STATION. Your result cannot contain duplicates.
+
+Input Format
+
+The STATION table is described as follows:
+
+SELECT DISTINCT CITY
+FROM STATION
+WHERE CITY LIKE '%A' 
+   OR CITY LIKE '%E' 
+   OR CITY LIKE '%I' 
+   OR CITY LIKE '%O' 
+   OR CITY LIKE '%U';
+
+Query the list of CITY names from STATION which have vowels (i.e., a, e, i, o, and u) as both their first and last characters. Your result cannot contain duplicates.
+
+Input Format
+
+The STATION table is described as follows:
+
+SELECT DISTINCT CITY
+FROM STATION
+WHERE (CITY LIKE "A%"
+    OR CITY LIKE "E%"
+    OR CITY LIKE "I%" 
+    OR CITY LIKE "O%" 
+    OR CITY LIKE "U%")
+AND (CITY LIKE "%A"
+  OR CITY LIKE "%E"
+  OR CITY LIKE "%I"
+  OR CITY LIKE "%o"
+  OR CITY LIKE "%U"); 
+
+Query the list of CITY names from STATION that do not start with vowels. Your result cannot contain duplicates.
+
+Input Format
+
+The STATION table is described as follows:
+
+SELECT DISTINCT CITY
+FROM STATION
+WHERE CITY NOT LIKE "A%"
+    AND CITY NOT LIKE "E%"
+    AND CITY NOT LIKE "I%"
+    AND CITY NOT LIKE "O%"
+    AND CITY NOT LIKE "U%";
+
+Query the list of CITY names from STATION that do not end with vowels. Your result cannot contain duplicates.
+
+Input Format
+
+The STATION table is described as follows:
+
+SELECT DISTINCT CITY
+FROM STATION
+WHERE CITY NOT LIKE "%A"
+    AND CITY NOT LIKE "%E"
+    AND CITY NOT LIKE "%I"
+    AND CITY NOT LIKE "%O"
+    AND CITY NOT LIKE "%U";
+
+Query the list of CITY names from STATION that either do not start with vowels or do not end with vowels. Your result cannot contain duplicates.
+
+Input Format
+
+The STATION table is described as follows:
+
+SELECT DISTINCT CITY
+FROM STATION
+WHERE (CITY NOT LIKE "A%"
+    AND CITY NOT LIKE "E%"
+    AND CITY NOT LIKE "I%"
+    AND CITY NOT LIKE "O%"
+    AND CITY NOT LIKE "U%")
+OR (CITY NOT LIKE "%A"
+ AND CITY NOT LIKE "%E"
+ AND CITY NOT LIKE "%I"
+ AND CITY NOT LIKE "%O"
+ AND CITY NOT LIKE "%U");
+
+Query the list of CITY names from STATION that do not start with vowels and do not end with vowels. Your result cannot contain duplicates.
+
+Input Format
+
+The STATION table is described as follows:
+
+SELECT DISTINCT CITY
+FROM STATION
+WHERE (CITY NOT LIKE "A%"
+    AND CITY NOT LIKE "E%"
+    AND CITY NOT LIKE "I%"
+    AND CITY NOT LIKE "O%"
+    AND CITY NOT LIKE "U%")
+AND (CITY NOT LIKE "%A"
+ AND CITY NOT LIKE "%E"
+ AND CITY NOT LIKE "%I"
+ AND CITY NOT LIKE "%O"
+ AND CITY NOT LIKE "%U");
+
+Query the Name of any student in STUDENTS who scored higher than 75 Marks. Order your output by the last three characters of each name. If two or more students both have names ending in the same last three characters (i.e.: Bobby, Robby, etc.), secondary sort them by ascending ID.
+
+Input Format
+
+The STUDENTS table is described as follows:
+
+SELECT NAME
+FROM STUDENTS
+WHERE MARKS > 75
+ORDER BY RIGHT(NAME, 3), ID ASC;
+
+Write a query that prints a list of employee names (i.e.: the name attribute) from the Employee table in alphabetical order.
+
+Input Format
+
+The Employee table containing employee data for a company is described as follows:
+
+SELECT name 
+FROM EMPLOYEE
+ORDER BY NAME;
+
+Write a query that prints a list of employee names (i.e.: the name attribute) for employees in Employee having a salary greater than $2000 per month who have been employees for less than 10 months. Sort your result by ascending employee_id.
+
+Input Format
+
+The Employee table containing employee data for a company is described as follows:
+
+SELECT name 
+FROM EMPLOYEE
+WHERE SALARY > 2000 AND MONTHS < 10
+ORDER BY EMPLOYEE_ID;
+
+Query the greatest value of the Northern Latitudes (LAT_N) from STATION that is less than 137.2345. Truncate your answer to 4 decimal places. 
+
+Input Format
+
+The STATION table is described as follows:
+
+SELECT ROUND(MAX(LAT_N), 4)
+FROM STATION
+WHERE LAT_N < 137.2345;
+
+Query the Western Longitude (LONG_W) for the largest Northern Latitude (LAT_N) in STATION that is less than . Round your answer to  decimal places.
+
+Input Format
+
+The STATION table is described as follows:
+
+SELECT ROUND(LONG_W, 4)
+FROM STATION
+WHERE LAT_N = (
+    SELECT MAX(LAT_N)
+    FROM STATION
+    WHERE LAT_N < 137.2345
+);
+
+Query the smallest Northern Latitude (LAT_N) from STATION that is greater than 38.778 Round your answer to 4 decimal places.
+
+SELECT ROUND(MIN(LAT_N),4)
+FROM STATION
+WHERE LAT_N > 38.7780;
+
+Query the Western Longitude (LONG_W)where the smallest Northern Latitude (LAT_N) in STATION is greater than 38.7780 Round your answer to 4 decimal places.
+
+Input Format
+
+The STATION table is described as follows:
+
+SELECT ROUND(LONG_W,4)
+FROM STATION
+WHERE LAT_N = (
+    SELECT MIN(LAT_N)
+    FROM STATION
+    WHERE LAT_N > 38.7780
+);
+
+
+Consider p1(a,b)  and p2(c,d) to be two points on a 2D plane. 
+
+ a happens to equal the minimum value in Northern Latitude (LAT_N in STATION). 
+ b happens to equal the minimum value in Western Longitude (LONG_W in STATION). 
+ c happens to equal the maximum value in Northern Latitude (LAT_N in STATION). 
+ d happens to equal the maximum value in Western Longitude (LONG_W in STATION). 
+Query the Manhattan Distance between points p1 and p2 and round it to a scale of  4 decimal places. 
+
+Input Format
+
+The STATION table is described as follows:
+
+SELECT ROUND(
+    (ABS(MAX(LAT_N) - MIN(LAT_N)) + ABS(MAX(LONG_W) - MIN(LONG_W))),
+    4
+) AS ManhattanDistance
+FROM STATION;
+
+Write a query identifying the type of each record in the TRIANGLES table using its three side lengths. Output one of the following statements for each record in the table: Equilateral: It's a triangle with 3 sides of equal length. Isosceles: It's a triangle with 2 sides of equal length. Scalene: It's a triangle with 3 sides of differing lengths. Not A Triangle: The given values of A, B, and C don't form a triangle. Input Format The TRIANGLES table is described as follows:
+
+SELECT
+    CASE
+        WHEN A + B <= C OR A + C <= B OR B + C <= A THEN 'Not A Triangle'
+        WHEN A = B AND B = C THEN 'Equilateral'
+        WHEN A = B OR B = C OR A = C THEN 'Isosceles'
+        ELSE 'Scalene'
+    END AS TriangleType
+FROM TRIANGLES;
+
+Generate the following two result sets:
+
+Query an alphabetically ordered list of all names in OCCUPATIONS, immediately followed by the first letter of each profession as a parenthetical (i.e.: enclosed in parentheses). For example: AnActorName(A), ADoctorName(D), AProfessorName(P), and ASingerName(S).
+Query the number of ocurrences of each occupation in OCCUPATIONS. Sort the occurrences in ascending order, and output them in the following format:
+
+There are a total of [occupation_count] [occupation]s.
+where [occupation_count] is the number of occurrences of an occupation in OCCUPATIONS and [occupation] is the lowercase occupation name. If more than one Occupation has the same [occupation_count], they should be ordered alphabetically.
+
+Note: There will be at least two entries in the table for each type of occupation.
+
+Input Format
+
+The OCCUPATIONS table is described as follows:
+
+SELECT CONCAT(Name, '(', LEFT(Occupation, 1), ')')
+FROM OCCUPATIONS
+ORDER BY Name;
+
+
+SELECT CONCAT('There are a total of ', COUNT(Occupation), ' ', LOWER(Occupation), 's.')
+FROM OCCUPATIONS
+GROUP BY Occupation
+ORDER BY COUNT(Occupation), Occupation;
+
+
+Query a count of the number of cities in CITY having a Population larger than 100000
+
+Input Format
+
+The CITY table is described as follows:
+
+SELECT COUNT(NAME) FROM CITY WHERE POPULATION >100000 
+
+
+Query the total population of all cities in CITY where District is California.
+
+Input Format
+
+The CITY table is described as follows:
+
+SELECT SUM(POPULATION) FROM CITY WHERE DISTRICT = "CALIFORNIA"
+
+
+Query the average population of all cities in CITY where District is California.
+
+Input Format
+
+The CITY table is described as follows:
+
+SELECT AVG(POPULATION) FROM CITY WHERE DISTRICT = "CALIFORNIA"
+
+
+Query the average population for all cities in CITY, rounded down to the nearest integer.
+
+Input Format
+
+The CITY table is described as follows:
+
+SELECT ROUND(AVG(POPULATION), 0) FROM CITY;
+
+
+Query the sum of the populations for all Japanese cities in CITY. The COUNTRYCODE for Japan is JPN.
+
+Input Format
+
+The CITY table is described as follows:
+
+SELECT SUM(POPULATION) FROM CITY WHERE COUNTRYCODE = "JPN";
+
+
+Query the difference between the maximum and minimum populations in CITY.
+
+Input Format
+
+The CITY table is described as follows:
+
+SELECT MAX(POPULATION) - MIN(POPULATION) FROM CITY;
+
+
+Samantha was tasked with calculating the average monthly salaries for all employees in the EMPLOYEES table, but did not realize her keyboard's  key was broken until after completing the calculation. She wants your help finding the difference between her miscalculation (using salaries with any zeros removed), and the actual average salary.
+
+Write a query calculating the amount of error (i.e.: ACTUL - MISCAL average monthly salaries), and round it up to the next integer. 
+
+Input Format
+
+The EMPLOYEES table is described as follows:                                                                                  Samantha was tasked with calculating the average monthly salaries for all employees in the EMPLOYEES table, but did not realize her keyboard's  key was broken until after completing the calculation. She wants your help finding the difference between her miscalculation (using salaries with any zeros removed), and the actual average salary.
+
+Write a query calculating the amount of error (i.e.:  average monthly salaries), and round it up to the next integer.
+
+Input Format
+
+The EMPLOYEES table is described as follows:
+
+1000<SALARY<10^5                                                                                                                              Samantha computes an average salary of 98.00 The actual average salary is 2159.00 
+
+The resulting error between the two calculations is . 2159.00 -   98.00 Since it is equal to the integer , it does not get rounded up. 
+
+
+SELECT CEIL(AVG(SALARY) - AVG(REPLACE(SALARY, '0', '')))
+AS ERROR
+FROM EMPLOYEES;
+
+
+We define an employee's total earnings to be their monthly  SALARY * MONTH worked, and the maximum total earnings to be the maximum total earnings for any employee in the Employee table. Write a query to find the maximum total earnings for all employees as well as the total number of employees who have maximum total earnings. Then print these values as 2  space-separated integers. 
+
+Input Format
+
+The Employee table containing employee data for a company is described as follows:
+
+SELECT 
+    (SALARY * MONTHS) AS MAX_EARNING,
+    COUNT(*) 
+FROM EMPLOYEE
+WHERE (SALARY * MONTHS) = (
+    SELECT MAX(SALARY * MONTHS)
+    FROM EMPLOYEE
+)
+GROUP BY MAX_EARNING;
+
+Given the CITY and COUNTRY tables, query the sum of the populations of all cities where the CONTINENT is 'Asia'.
+
+Note: CITY.CountryCode and COUNTRY.Code are matching key columns.
+
+Input Format
+
+The CITY and COUNTRY tables are described as follows:
+
+SELECT SUM(C.POPULATION)
+FROM CITY C JOIN COUNTRY Y ON Y.CODE = C.COUNTRYCODE 
+WHERE Y.CONTINENT = "ASIA"
+
+
+Given the CITY and COUNTRY tables, query the names of all cities where the CONTINENT is 'Africa'.
+
+Note: CITY.CountryCode and COUNTRY.Code are matching key columns.
+
+Input Format
+
+The CITY and COUNTRY tables are described as follows:
+
+
+SELECT C.NAME
+FROM CITY C JOIN COUNTRY Y ON Y.CODE = C.COUNTRYCODE 
+WHERE Y.CONTINENT = "AFRICA"
+
+
+Given the CITY and COUNTRY tables, query the names of all the continents (COUNTRY.Continent) and their respective average city populations (CITY.Population) rounded down to the nearest integer.
+
+Note: CITY.CountryCode and COUNTRY.Code are matching key columns.
+
+Input Format
+
+The CITY and COUNTRY tables are described as follows:
+
+SELECT Y.CONTINENT, FLOOR(AVG(C.POPULATION))
+FROM CITY C JOIN COUNTRY Y ON Y.CODE = C.COUNTRYCODE 
+GROUP BY Y.CONTINENT
+
+
+
+
+
+
