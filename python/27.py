@@ -7,5 +7,8 @@ i = 0
 while i < len(list):
     if(list[i] == number):
         print("NUMBER FOUNF :",number," AT THE INDEX : ",i)
+        break
+    else:
+        print("NUMBER :",number,"NOT FOUND")
     
     i += 1
